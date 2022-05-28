@@ -6,7 +6,7 @@ _This version by [LukasForst](https://github.com/LukasForst) was migrated to Kto
 
 ```kotlin
 dependencies { 
-    implementation("dev.forst", "ktor-openapi-generator", "0.4.2")
+    implementation("dev.forst", "ktor-openapi-generator", "0.4.3")
 }
 ```
 

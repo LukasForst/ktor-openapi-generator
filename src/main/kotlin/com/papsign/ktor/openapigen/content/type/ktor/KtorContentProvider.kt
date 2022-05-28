@@ -68,7 +68,7 @@ object KtorContentProvider : ContentTypeProvider, BodyParser, ResponseSerializer
     }
 
     @Suppress("UNCHECKED_CAST")
-    inline fun <reified T : Any, R> T.getPrivateProperty(name: String): R? =
+    private inline fun <reified T : Any, R> T.getPrivateProperty(name: String): R? =
         T::class.memberProperties
             .firstOrNull { it.name == name }
             ?.apply { isAccessible = true }
