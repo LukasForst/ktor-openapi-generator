@@ -25,7 +25,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Ktor server dependencies
-    val ktorVersion = "2.0.2"
+    val ktorVersion = "2.0.3"
     implementation("io.ktor", "ktor-server-core", ktorVersion)
     implementation("io.ktor", "ktor-server-auth", ktorVersion)
     implementation("io.ktor", "ktor-serialization-jackson", ktorVersion)
@@ -34,7 +34,7 @@ dependencies {
 
     implementation("org.slf4j:slf4j-api:1.7.36")
 
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2") // needed for multipart parsing
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3") // needed for multipart parsing
     implementation("org.webjars:swagger-ui:3.25.0")
 
     implementation("org.reflections:reflections:0.10.2") // only used while initializing
