@@ -3,7 +3,7 @@ import java.net.URL
 
 
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.10"
 
     `maven-publish`
     signing
@@ -25,7 +25,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Ktor server dependencies
-    val ktorVersion = "2.0.3"
+    val ktorVersion = "2.1.0"
     implementation("io.ktor", "ktor-server-core", ktorVersion)
     implementation("io.ktor", "ktor-server-auth", ktorVersion)
     implementation("io.ktor", "ktor-serialization-jackson", ktorVersion)

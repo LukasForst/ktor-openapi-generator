@@ -19,6 +19,7 @@ import com.papsign.ktor.openapigen.schema.builder.provider.FinalSchemaBuilderPro
 import io.ktor.http.Headers
 import io.ktor.http.Parameters
 import io.ktor.util.toMap
+import java.util.Locale
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
 import kotlin.reflect.full.findAnnotation
@@ -29,7 +30,11 @@ class ModularParameterHandler<T>(val parsers: Map<KParameter, Builder<*>>, val c
 
     override fun parse(parameters: Parameters, headers: Headers): T {
         return constructor.callBy(parsers.mapValues {
-            val value = it.value.build(it.key.name.toString(), it.key.remapOpenAPINames(parameters.toMap() + headers.toMap().entries.groupBy { it.key.toLowerCase() }.mapValues { it.value.flatMap { it.value } }))
+            val value = it.value.build(it.key.name.toString(), it.key.remapOpenAPINames(parameters.toMap() + headers.toMap().entries.groupBy {
+                it.key.lowercase(
+                    Locale.getDefault()
+                )
+            }.mapValues { it.value.flatMap { it.value } }))
             if (value != null || it.key.type.isMarkedNullable) {
                 value
             } else {

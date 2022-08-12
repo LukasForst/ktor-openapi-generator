@@ -10,6 +10,7 @@ import com.papsign.ktor.openapigen.modules.openapi.HandlerModule
 import com.papsign.ktor.openapigen.modules.openapi.OperationModule
 import com.papsign.ktor.openapigen.modules.providers.MethodProvider
 import com.papsign.ktor.openapigen.modules.providers.PathProvider
+import java.util.Locale
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -25,7 +26,7 @@ object RouteHandler: HandlerModule {
         val operationModules = provider.ofType<OperationModule>()
         apiGen.api.paths.getOrPut(path) { PathItemModel() }.also {pathItem ->
             methods.forEach {
-                val name = it.method.value.toLowerCase()
+                val name = it.method.value.lowercase(Locale.getDefault())
                 //if (pathItem.containsKey(name)) error("$path::$name already defined")
                 val op = pathItem.getOrPut(name) { OperationModel() } as OperationModel
                 operationModules.forEach {
