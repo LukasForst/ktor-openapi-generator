@@ -25,7 +25,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Ktor server dependencies
-    val ktorVersion = "2.1.0"
+    val ktorVersion = "2.1.1"
     implementation("io.ktor", "ktor-server-core", ktorVersion)
     implementation("io.ktor", "ktor-server-auth", ktorVersion)
     implementation("io.ktor", "ktor-serialization-jackson", ktorVersion)
@@ -54,7 +54,7 @@ dependencies {
 
     testImplementation("ch.qos.logback", "logback-classic", "1.3.0-alpha5") // logging framework for the tests
 
-    val junitVersion = "5.8.2"
+    val junitVersion = "5.9.0"
     testImplementation("org.junit.jupiter", "junit-jupiter-api", junitVersion) // junit testing framework
     testImplementation("org.junit.jupiter", "junit-jupiter-params", junitVersion) // generated parameters for tests
     testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", junitVersion) // testing runtime
