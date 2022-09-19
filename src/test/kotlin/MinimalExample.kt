@@ -1,6 +1,5 @@
 import com.papsign.ktor.openapigen.OpenAPIGen
 import com.papsign.ktor.openapigen.annotations.parameters.PathParam
-import com.papsign.ktor.openapigen.openAPIGen
 import com.papsign.ktor.openapigen.route.apiRouting
 import com.papsign.ktor.openapigen.route.path.normal.post
 import com.papsign.ktor.openapigen.route.response.respond
@@ -10,7 +9,6 @@ import io.ktor.server.application.Application
 import io.ktor.server.application.call
 import io.ktor.server.application.install
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.response.respond
 import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
@@ -21,7 +19,9 @@ import io.ktor.server.routing.routing
 fun Application.minimalExample() {
     // install OpenAPI plugin
     install(OpenAPIGen) {
-        // this automatically servers Swagger UI on /swagger-ui
+        // this servers OpenAPI definition on /openapi.json
+        serveOpenApiJson = true
+        // this servers Swagger UI on /swagger-ui/index.html
         serveSwaggerUi = true
         info {
             title = "Minimal Example API"
@@ -30,17 +30,6 @@ fun Application.minimalExample() {
     // install JSON support
     install(ContentNegotiation) {
         jackson()
-    }
-    // add basic routes for openapi.json and redirect to UI
-    routing {
-        // serve openapi.json
-        get("/openapi.json") {
-            call.respond(this@routing.application.openAPIGen.api.serialize())
-        }
-        // and do redirect to make it easier to remember
-        get("/swagger-ui") {
-            call.respondRedirect("/swagger-ui/index.html?url=/openapi.json", true)
-        }
     }
     // and now example routing
     apiRouting {

@@ -11,6 +11,8 @@ import io.ktor.server.application.ApplicationCallPipeline
 import io.ktor.server.application.BaseApplicationPlugin
 import io.ktor.server.application.call
 import io.ktor.server.request.path
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondRedirect
 import io.ktor.util.AttributeKey
 import org.reflections.Reflections
 import kotlin.reflect.full.starProjectedType
@@ -58,9 +60,12 @@ class OpenAPIGen(
             api.externalDocs = ExternalDocumentationModel(url).apply(configure)
         }
 
+        var openApiJsonPath = "/openapi.json"
+        var serveOpenApiJson = true
+
         var swaggerUiPath = "swagger-ui"
         var serveSwaggerUi = true
-        var swaggerUiVersion = "3.25.0"
+        var swaggerUiVersion = "4.14.0"
 
         var scanPackagesForModules: Array<String> = arrayOf()
 
@@ -105,12 +110,25 @@ class OpenAPIGen(
         override fun install(pipeline: ApplicationCallPipeline, configure: Configuration.() -> Unit): OpenAPIGen {
             val api = OpenAPIModel()
             val cfg = Configuration(api).apply(configure)
-            if (cfg.serveSwaggerUi) {
-                val ui = SwaggerUi(cfg.swaggerUiPath, cfg.swaggerUiVersion)
+
+            if (cfg.serveOpenApiJson) {
                 pipeline.intercept(ApplicationCallPipeline.Call) {
-                    val cmp = "/${cfg.swaggerUiPath.trim('/')}/"
-                    if (call.request.path().startsWith(cmp))
-                        ui.serve(call.request.path().removePrefix(cmp), call)
+                    if (call.request.path() == cfg.openApiJsonPath) {
+                        call.respond(api.serialize())
+                    }
+                }
+            }
+
+            if (cfg.serveSwaggerUi) {
+                val ui = SwaggerUi(cfg.swaggerUiPath, cfg.swaggerUiVersion, if (cfg.serveOpenApiJson) cfg.openApiJsonPath else null)
+                val swaggerRoot = "/${cfg.swaggerUiPath.removePrefix("/")}"
+                val swaggerUiResources = "/${cfg.swaggerUiPath.trim('/')}/"
+                pipeline.intercept(ApplicationCallPipeline.Call) {
+                    when {
+                        call.request.path() == swaggerRoot -> call.respondRedirect("${swaggerRoot}/index.html")
+                        call.request.path().startsWith(swaggerUiResources) ->
+                            ui.serve(call.request.path().removePrefix(swaggerUiResources), call)
+                    }
                 }
             }
             return OpenAPIGen(cfg, pipeline)

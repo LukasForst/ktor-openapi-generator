@@ -10,7 +10,7 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 
     id("net.nemerosa.versioning") version "2.15.1"
-    id("org.jetbrains.dokka") version "1.6.10"
+    id("org.jetbrains.dokka") version "1.7.10"
 }
 
 group = "dev.forst"
@@ -30,17 +30,17 @@ dependencies {
     implementation("io.ktor", "ktor-server-auth", ktorVersion)
     implementation("io.ktor", "ktor-serialization-jackson", ktorVersion)
     implementation("io.ktor", "ktor-server-content-negotiation", ktorVersion)
-    implementation("io.ktor","ktor-server-status-pages",ktorVersion)
+    implementation("io.ktor", "ktor-server-status-pages", ktorVersion)
 
-    implementation("org.slf4j:slf4j-api:1.7.36")
+    implementation("org.slf4j:slf4j-api:2.0.1")
 
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3") // needed for multipart parsing
-    implementation("org.webjars:swagger-ui:3.25.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4") // needed for multipart parsing
+    implementation("org.webjars:swagger-ui:4.14.0")
 
     implementation("org.reflections:reflections:0.10.2") // only used while initializing
 
     // testing
-    testImplementation("io.ktor","ktor-server-netty",ktorVersion)
+    testImplementation("io.ktor", "ktor-server-netty", ktorVersion)
     testImplementation("io.ktor", "ktor-server-core", ktorVersion)
     testImplementation("io.ktor", "ktor-server-test-host", ktorVersion)
     testImplementation("io.ktor", "ktor-server-auth", ktorVersion)
@@ -52,7 +52,9 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(kotlin("stdlib-jdk8"))
 
-    testImplementation("ch.qos.logback", "logback-classic", "1.3.0-alpha5") // logging framework for the tests
+    // we want to keep it compatible with java 8, thus we use 1.3 series, see
+    // https://www.mail-archive.com/logback-user@qos.ch/msg05119.html
+    testImplementation("ch.qos.logback", "logback-classic", "1.3.1") // logging framework for the tests
 
     val junitVersion = "5.9.0"
     testImplementation("org.junit.jupiter", "junit-jupiter-api", junitVersion) // junit testing framework

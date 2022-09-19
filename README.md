@@ -23,7 +23,9 @@ then [MinimalExampleTest.kt](src/test/kotlin/MinimalExampleTest.kt) that it actu
 fun Application.minimalExample() {
     // install OpenAPI plugin
     install(OpenAPIGen) {
-        // this automatically servers Swagger UI on /swagger-ui
+        // this servers OpenAPI definition on /openapi.json
+        serveOpenApiJson = true
+        // this servers Swagger UI on /swagger-ui/index.html
         serveSwaggerUi = true
         info {
             title = "Minimal Example API"
@@ -32,17 +34,6 @@ fun Application.minimalExample() {
     // install JSON support
     install(ContentNegotiation) {
         jackson()
-    }
-    // add basic routes for openapi.json and redirect to UI
-    routing {
-        // serve openapi.json
-        get("/openapi.json") {
-            call.respond(this@routing.application.openAPIGen.api.serialize())
-        }
-        // and do redirect to make it easier to remember
-        get("/swagger-ui") {
-            call.respondRedirect("/swagger-ui/index.html?url=/openapi.json", true)
-        }
     }
     // and now example routing
     apiRouting {

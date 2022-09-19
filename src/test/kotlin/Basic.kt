@@ -63,12 +63,8 @@ object Basic {
 
             // normal Ktor routing
             routing {
-                get("/openapi.json") {
-                    call.respond(this.application.openAPIGen.api.serialize())
-                }
-
                 get("/") {
-                    call.respondRedirect("/swagger-ui/index.html?url=/openapi.json", true)
+                    call.respondRedirect("/swagger-ui")
                 }
             }
 

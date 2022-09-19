@@ -14,7 +14,11 @@ import io.ktor.server.request.port
 import io.ktor.server.response.respond
 import java.net.URL
 
-class SwaggerUi(private val basePath: String, private val version: String) {
+class SwaggerUi(
+    private val basePath: String,
+    private val version: String,
+    private val openApiJsonUrl: String?,
+) {
     private val notFound = mutableListOf<String>()
     private val content = mutableMapOf<String, ResourceContent>()
     suspend fun serve(filename: String?, call: ApplicationCall) {
@@ -27,7 +31,7 @@ class SwaggerUi(private val basePath: String, private val version: String) {
                     notFound.add(filename)
                     return
                 }
-                call.respond(content.getOrPut(filename) { ResourceContent(resource, call.redirectUrl()) })
+                call.respond(content.getOrPut(filename) { ResourceContent(resource, call.redirectUrl(), openApiJsonUrl) })
             }
         }
     }
@@ -41,18 +45,31 @@ class SwaggerUi(private val basePath: String, private val version: String) {
 }
 
 
-
 private val contentTypes = mapOf(
     "html" to Html,
     "css" to CSS,
     "js" to JavaScript,
     "json" to ContentType.Application.Json.withCharset(Charsets.UTF_8),
-    "png" to PNG)
+    "png" to PNG
+)
 
-private class ResourceContent(val resource: URL, val address: String) : OutgoingContent.ByteArrayContent() {
+private class ResourceContent(
+    val resource: URL,
+    val address: String,
+    val openApiJsonUrl: String?,
+) : OutgoingContent.ByteArrayContent() {
     private val bytes by lazy {
         if (contentType == JavaScript) {
-            resource.readText().replace("http://localhost:3200/oauth2-redirect.html", address + "oauth2-redirect.html").toByteArray()
+            resource.readText()
+                .replace("http://localhost:3200/oauth2-redirect.html", address + "oauth2-redirect.html")
+                .let {
+                    if (openApiJsonUrl != null) {
+                        it.replace("https://petstore.swagger.io/v2/swagger.json", openApiJsonUrl)
+                    } else {
+                        it
+                    }
+                }
+                .toByteArray()
         } else resource.readBytes()
     }
 
