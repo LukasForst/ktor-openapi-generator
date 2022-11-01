@@ -10,7 +10,7 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 
     id("net.nemerosa.versioning") version "2.15.1"
-    id("org.jetbrains.dokka") version "1.7.10"
+    id("org.jetbrains.dokka") version "1.7.20"
 }
 
 group = "dev.forst"
