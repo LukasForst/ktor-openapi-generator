@@ -8,7 +8,7 @@ plugins {
     `maven-publish`
     signing
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-
+    // we can not switch to 3.x.x because we want to keep it compatible with JVM 8
     id("net.nemerosa.versioning") version "2.15.1"
     id("org.jetbrains.dokka") version "1.7.20"
 }
@@ -25,41 +25,40 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Ktor server dependencies
-    val ktorVersion = "2.1.2"
-    implementation("io.ktor", "ktor-server-core", ktorVersion)
-    implementation("io.ktor", "ktor-server-auth", ktorVersion)
-    implementation("io.ktor", "ktor-serialization-jackson", ktorVersion)
-    implementation("io.ktor", "ktor-server-content-negotiation", ktorVersion)
-    implementation("io.ktor", "ktor-server-status-pages", ktorVersion)
+    implementation("io.ktor:ktor-server-core:2.1.3")
+    implementation("io.ktor:ktor-server-auth:2.1.3")
+    implementation("io.ktor:ktor-serialization-jackson:2.1.3")
+    implementation("io.ktor:ktor-server-content-negotiation:2.1.3")
+    implementation("io.ktor:ktor-server-status-pages:2.1.3")
 
     implementation("org.slf4j:slf4j-api:2.0.3")
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4") // needed for multipart parsing
-    implementation("org.webjars:swagger-ui:4.14.0")
+    // when updating version here, don't forge to update version in OpenAPIGen.kt line 68
+    implementation("org.webjars:swagger-ui:4.15.0")
 
     implementation("org.reflections:reflections:0.10.2") // only used while initializing
 
     // testing
-    testImplementation("io.ktor", "ktor-server-netty", ktorVersion)
-    testImplementation("io.ktor", "ktor-server-core", ktorVersion)
-    testImplementation("io.ktor", "ktor-server-test-host", ktorVersion)
-    testImplementation("io.ktor", "ktor-server-auth", ktorVersion)
-    testImplementation("io.ktor", "ktor-server-auth-jwt", ktorVersion)
-    testImplementation("io.ktor", "ktor-server-content-negotiation", ktorVersion)
-    testImplementation("io.ktor", "ktor-serialization-jackson", ktorVersion)
-    testImplementation("io.ktor", "ktor-client-content-negotiation", ktorVersion)
+    testImplementation("io.ktor:ktor-server-netty:2.1.3")
+    testImplementation("io.ktor:ktor-server-core:2.1.3")
+    testImplementation("io.ktor:ktor-server-test-host:2.1.3")
+    testImplementation("io.ktor:ktor-server-auth:2.1.3")
+    testImplementation("io.ktor:ktor-server-auth-jwt:2.1.3")
+    testImplementation("io.ktor:ktor-server-content-negotiation:2.1.3")
+    testImplementation("io.ktor:ktor-serialization-jackson:2.1.3")
+    testImplementation("io.ktor:ktor-client-content-negotiation:2.1.3")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("stdlib-jdk8"))
 
     // we want to keep it compatible with java 8, thus we use 1.3 series, see
     // https://www.mail-archive.com/logback-user@qos.ch/msg05119.html
-    testImplementation("ch.qos.logback", "logback-classic", "1.3.1") // logging framework for the tests
+    testImplementation("ch.qos.logback:logback-classic:1.3.4") // logging framework for the tests
 
-    val junitVersion = "5.9.0"
-    testImplementation("org.junit.jupiter", "junit-jupiter-api", junitVersion) // junit testing framework
-    testImplementation("org.junit.jupiter", "junit-jupiter-params", junitVersion) // generated parameters for tests
-    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", junitVersion) // testing runtime
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1") // junit testing framework
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1") // generated parameters for tests
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1") // testing runtime
 }
 
 tasks {
