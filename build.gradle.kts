@@ -32,7 +32,7 @@ dependencies {
     implementation("io.ktor", "ktor-server-content-negotiation", ktorVersion)
     implementation("io.ktor", "ktor-server-status-pages", ktorVersion)
 
-    implementation("org.slf4j:slf4j-api:2.0.1")
+    implementation("org.slf4j:slf4j-api:2.0.3")
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4") // needed for multipart parsing
     implementation("org.webjars:swagger-ui:4.14.0")
