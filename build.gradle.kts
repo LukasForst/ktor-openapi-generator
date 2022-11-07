@@ -54,7 +54,7 @@ dependencies {
 
     // we want to keep it compatible with java 8, thus we use 1.3 series, see
     // https://www.mail-archive.com/logback-user@qos.ch/msg05119.html
-    testImplementation("ch.qos.logback:logback-classic:1.3.4") // logging framework for the tests
+    testImplementation("ch.qos.logback:logback-classic:1.4.4") // logging framework for the tests
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1") // junit testing framework
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1") // generated parameters for tests
