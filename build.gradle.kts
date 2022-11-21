@@ -35,7 +35,7 @@ dependencies {
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.0") // needed for multipart parsing
     // when updating version here, don't forge to update version in OpenAPIGen.kt line 68
-    implementation("org.webjars:swagger-ui:4.15.0")
+    implementation("org.webjars:swagger-ui:4.15.5")
 
     implementation("org.reflections:reflections:0.10.2") // only used while initializing
 
