@@ -3,7 +3,7 @@ import java.net.URL
 
 
 plugins {
-    kotlin("jvm") version "1.7.22"
+    kotlin("jvm") version "1.8.0"
 
     `maven-publish`
     signing
@@ -25,11 +25,11 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // Ktor server dependencies
-    implementation("io.ktor:ktor-server-core:2.2.1")
-    implementation("io.ktor:ktor-server-auth:2.2.1")
-    implementation("io.ktor:ktor-serialization-jackson:2.2.1")
-    implementation("io.ktor:ktor-server-content-negotiation:2.2.1")
-    implementation("io.ktor:ktor-server-status-pages:2.2.1")
+    implementation("io.ktor:ktor-server-core:2.2.2")
+    implementation("io.ktor:ktor-server-auth:2.2.2")
+    implementation("io.ktor:ktor-serialization-jackson:2.2.2")
+    implementation("io.ktor:ktor-server-content-negotiation:2.2.2")
+    implementation("io.ktor:ktor-server-status-pages:2.2.2")
 
     implementation("org.slf4j:slf4j-api:2.0.6")
 
@@ -40,14 +40,14 @@ dependencies {
     implementation("org.reflections:reflections:0.10.2") // only used while initializing
 
     // testing
-    testImplementation("io.ktor:ktor-server-netty:2.2.1")
-    testImplementation("io.ktor:ktor-server-core:2.2.1")
-    testImplementation("io.ktor:ktor-server-test-host:2.2.1")
-    testImplementation("io.ktor:ktor-server-auth:2.2.1")
-    testImplementation("io.ktor:ktor-server-auth-jwt:2.2.1")
-    testImplementation("io.ktor:ktor-server-content-negotiation:2.2.1")
-    testImplementation("io.ktor:ktor-serialization-jackson:2.2.1")
-    testImplementation("io.ktor:ktor-client-content-negotiation:2.2.1")
+    testImplementation("io.ktor:ktor-server-netty:2.2.2")
+    testImplementation("io.ktor:ktor-server-core:2.2.2")
+    testImplementation("io.ktor:ktor-server-test-host:2.2.2")
+    testImplementation("io.ktor:ktor-server-auth:2.2.2")
+    testImplementation("io.ktor:ktor-server-auth-jwt:2.2.2")
+    testImplementation("io.ktor:ktor-server-content-negotiation:2.2.2")
+    testImplementation("io.ktor:ktor-serialization-jackson:2.2.2")
+    testImplementation("io.ktor:ktor-client-content-negotiation:2.2.2")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("stdlib-jdk8"))
@@ -56,9 +56,9 @@ dependencies {
     // https://www.mail-archive.com/logback-user@qos.ch/msg05119.html
     testImplementation("ch.qos.logback:logback-classic:1.3.5") // logging framework for the tests
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1") // junit testing framework
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1") // generated parameters for tests
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1") // testing runtime
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2") // junit testing framework
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2") // generated parameters for tests
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2") // testing runtime
 }
 
 tasks {
