@@ -29,7 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-server-auth:2.2.2")
     implementation("io.ktor:ktor-serialization-jackson:2.2.2")
     implementation("io.ktor:ktor-server-content-negotiation:2.2.2")
-    implementation("io.ktor:ktor-server-status-pages:2.2.2")
+    implementation("io.ktor:ktor-server-status-pages:2.2.3")
 
     implementation("org.slf4j:slf4j-api:2.0.6")
 
