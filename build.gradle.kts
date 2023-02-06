@@ -42,7 +42,7 @@ dependencies {
     // testing
     testImplementation("io.ktor:ktor-server-netty:2.2.2")
     testImplementation("io.ktor:ktor-server-core:2.2.2")
-    testImplementation("io.ktor:ktor-server-test-host:2.2.2")
+    testImplementation("io.ktor:ktor-server-test-host:2.2.3")
     testImplementation("io.ktor:ktor-server-auth:2.2.2")
     testImplementation("io.ktor:ktor-server-auth-jwt:2.2.2")
     testImplementation("io.ktor:ktor-server-content-negotiation:2.2.2")
