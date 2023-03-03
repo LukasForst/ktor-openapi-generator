@@ -24,7 +24,7 @@ abstract class RegularExpressionConstraintProcessor<A: Annotation>(): SchemaProc
     private class RegularExpressionConstraintValidator(private val constraint: RegularExpressionConstraint): Validator {
         override fun <T> validate(subject: T?): T? {
             if (subject is String?) {
-                if (subject == null || !constraint.pattern.toRegex().containsMatchIn(subject)) {
+                if (subject == null || !constraint.pattern.toRegex().matches(subject)) {
                     throw RegularExpressionConstraintViolation(subject, constraint)
                 }
             } else {
