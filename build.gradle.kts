@@ -27,7 +27,7 @@ dependencies {
     // Ktor server dependencies
     implementation("io.ktor:ktor-server-core:2.2.3")
     implementation("io.ktor:ktor-server-auth:2.2.3")
-    implementation("io.ktor:ktor-serialization-jackson:2.2.2")
+    implementation("io.ktor:ktor-serialization-jackson:2.2.4")
     implementation("io.ktor:ktor-server-content-negotiation:2.2.2")
     implementation("io.ktor:ktor-server-status-pages:2.2.3")
 
@@ -46,7 +46,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-auth:2.2.2")
     testImplementation("io.ktor:ktor-server-auth-jwt:2.2.2")
     testImplementation("io.ktor:ktor-server-content-negotiation:2.2.2")
-    testImplementation("io.ktor:ktor-serialization-jackson:2.2.2")
+    testImplementation("io.ktor:ktor-serialization-jackson:2.2.4")
     testImplementation("io.ktor:ktor-client-content-negotiation:2.2.2")
 
     testImplementation(kotlin("test"))
