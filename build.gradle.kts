@@ -47,7 +47,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-auth-jwt:2.2.2")
     testImplementation("io.ktor:ktor-server-content-negotiation:2.2.2")
     testImplementation("io.ktor:ktor-serialization-jackson:2.2.2")
-    testImplementation("io.ktor:ktor-client-content-negotiation:2.2.2")
+    testImplementation("io.ktor:ktor-client-content-negotiation:2.3.0")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("stdlib-jdk8"))
